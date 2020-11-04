@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>student form</title>
+</head>
+<body>
+    <form th:method="POST" th:action="@{/student/processForm}" th:object="${student}">
+        <label for="firstName">First name: </label>
+        <input type="text" th:field="*{firstName}" id="firstName"/>
+
+        <br><br>
+
+        <label for="lastName">Last name: </label>
+        <input type="text" th:field="*{lastName}" id="lastName"/>
+
+        <br><br>
+
+        <input type="submit" value="Submit"/>
+    </form>
+</body>
+</html>
