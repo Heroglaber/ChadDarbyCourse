@@ -18,10 +18,8 @@
 
         <label for="country">Country: </label>
         <select th:field="*{country}" id="country">
-            <option th:value="Brazil" th:text="Brazil"></option>
-            <option th:value="France" th:text="France"></option>
-            <option th:value="Germany" th:text="Germany"></option>
-            <option th:value="India" th:text="India"></option>
+            <option th:each="entry : ${student.getCountryOptions().entrySet()}" th:value="${entry.key}" th:text="${entry.value}">
+            </option>
         </select>
 
         <input type="submit" value="Submit"/>
