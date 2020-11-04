@@ -22,6 +22,26 @@
             </option>
         </select>
 
+        <label>Favorite language: </label>
+        <ul>
+            <li>
+                <label for="favoriteLanguage1" th:text="Java">Java</label>
+                <input type="radio" th:field="*{favoriteLanguage}" th:value="Java" id="favoriteLanguage1"/>
+            </li>
+            <li>
+                <label for="favoriteLanguage2" text="C#">C#</label>
+                <input type="radio" th:field="*{favoriteLanguage}" value="C#" id="favoriteLanguage2"/>
+            </li>
+            <li>
+                <label for="favoriteLanguage3" th:text="PHP">PHP</label>
+                <input type="radio" th:field="*{favoriteLanguage}" th:value="PHP" id="favoriteLanguage3"/>
+            </li>
+            <li>
+                <label for="favoriteLanguage4" th:text="Ruby">Ruby</label>
+                <input type="radio" th:field="*{favoriteLanguage}" th:value="Ruby" id="favoriteLanguage4"/>
+            </li>
+        </ul>
+
         <input type="submit" value="Submit"/>
     </form>
 </body>
