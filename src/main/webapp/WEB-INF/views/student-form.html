@@ -42,6 +42,13 @@
             </li>
         </ul>
 
+        <label for="checkbox1" th:text="Linux">Linux</label>
+        <input type="checkbox" id="checkbox1" th:field="*{operatingSystems}" th:value="Linux"/>
+        <label for="checkbox2" th:text="MacOS">MacOS</label>
+        <input type="checkbox" id="checkbox2" th:field="*{operatingSystems}" th:value="MacOS"/>
+        <label for="checkbox3" th:text="Windows">Windows</label>
+        <input type="checkbox" id="checkbox3" th:field="*{operatingSystems}" th:value="Windows"/>
+
         <input type="submit" value="Submit"/>
     </form>
 </body>
