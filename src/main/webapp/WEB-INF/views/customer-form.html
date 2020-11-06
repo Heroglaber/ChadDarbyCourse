@@ -19,7 +19,22 @@
         <span class="error">
             <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Lastname Error</td>
         </span>
+
         <br><br>
+
+        <label for="freePasses">Free passes: </label>
+        <input type="text" th:field="*{freePasses}" id="freePasses"/>
+        <span class="error">
+            <td th:if="${#fields.hasErrors('freePasses')}" th:errors="*{freePasses}">freepasses error</td>
+        </span>
+
+        <br><br>
+
+        <label for="postalCode">Postal code: </label>
+        <input type="text" th:field="*{postalCode}" id="postalCode"/>
+        <span class="error">
+            <td th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}">postal code error</td>
+        </span>
 
         <input type="submit" value="Submit"/>
     </form>
