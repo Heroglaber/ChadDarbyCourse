@@ -36,6 +36,14 @@
             <td th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}">postal code error</td>
         </span>
 
+        <br><br>
+
+        <label for="courseCode">Course code: </label>
+        <input type="text" th:field="*{courseCode}" id="courseCode"/>
+        <span class="error">
+            <td th:if="${#fields.hasErrors('courseCode')}" th:errors="*{courseCode}">course code error</td>
+        </span>
+
         <input type="submit" value="Submit"/>
     </form>
 </body>
