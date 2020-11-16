@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class CreateDemo {
+public class GetInstructorDetailDemo {
     public static void main(String[] args) {
 
         SessionFactory factory = new Configuration()
@@ -18,26 +18,22 @@ public class CreateDemo {
         Session session = factory.getCurrentSession();
 
         try {
-//            Instructor tempInstructor = new Instructor("Chad", "Darby", "darby@luv2code.com");
-//
-//            InstructorDetail instructorDetail =
-//                    new InstructorDetail("https://www.luv2code.com/youtube", "luv 2 code!!!");
-
-            Instructor tempInstructor = new Instructor("Madhu", "Patel", "madhu@luv2code.com");
-
-            InstructorDetail instructorDetail =
-                    new InstructorDetail("https://www.madhu.com/youtube", "guitar");
-
-            tempInstructor.setInstructorDetail(instructorDetail);
-
             session.beginTransaction();
 
-            System.out.println("Saving instructor: " + tempInstructor);
-            session.save(tempInstructor);
+            int theId = 3999;
+            InstructorDetail instructorDetail = session.get(InstructorDetail.class, theId);
+
+            Instructor instructor = instructorDetail.getInstructor();
+
+            System.out.println("Associated instructor: " + instructor);
 
             session.getTransaction().commit();
         }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
         finally {
+            session.close();
             factory.close();
         }
     }
