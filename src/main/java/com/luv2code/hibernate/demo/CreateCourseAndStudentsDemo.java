@@ -1,14 +1,11 @@
 package com.luv2code.hibernate.demo;
 
-import com.luv2code.hibernate.demo.entity.Course;
-import com.luv2code.hibernate.demo.entity.Instructor;
-import com.luv2code.hibernate.demo.entity.InstructorDetail;
-import com.luv2code.hibernate.demo.entity.Review;
+import com.luv2code.hibernate.demo.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class GetCourseAndReviewsDemo {
+public class CreateCourseAndStudentsDemo {
     public static void main(String[] args) {
 
         SessionFactory factory = new Configuration()
@@ -17,6 +14,7 @@ public class GetCourseAndReviewsDemo {
                 .addAnnotatedClass(InstructorDetail.class)
                 .addAnnotatedClass(Course.class)
                 .addAnnotatedClass(Review.class)
+                .addAnnotatedClass(Student.class)
                 .buildSessionFactory();
 
         Session session = factory.getCurrentSession();
@@ -25,10 +23,21 @@ public class GetCourseAndReviewsDemo {
 
             session.beginTransaction();
 
-            int theId = 10;
-            Course tempCourse = session.get(Course.class, theId);
+            Course tempCourse = new Course("Pacman - How To Score One Million Points");
 
-            System.out.println(tempCourse.getReviews());
+            System.out.println("Saving course ...");
+            session.save(tempCourse);
+            System.out.println("Saved the course: " + tempCourse);
+
+            Student student1 = new Student("John", "Doe", "john@luv2code.com");
+            Student student2 = new Student("Mary", "Public", "mary@luv2code.com");
+
+            tempCourse.addStudent(student1);
+            tempCourse.addStudent(student2);
+            System.out.println("Saved students: " + tempCourse.getStudents());
+
+            session.save(student1);
+            session.save(student2);
 
             session.getTransaction().commit();
         }

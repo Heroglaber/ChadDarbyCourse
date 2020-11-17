@@ -1,13 +1,11 @@
 package com.luv2code.hibernate.demo;
 
-import com.luv2code.hibernate.demo.entity.Course;
-import com.luv2code.hibernate.demo.entity.Instructor;
-import com.luv2code.hibernate.demo.entity.InstructorDetail;
+import com.luv2code.hibernate.demo.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class EagerLazyDemo {
+public class DeleteStudentDemo {
     public static void main(String[] args) {
 
         SessionFactory factory = new Configuration()
@@ -15,6 +13,8 @@ public class EagerLazyDemo {
                 .addAnnotatedClass(Instructor.class)
                 .addAnnotatedClass(InstructorDetail.class)
                 .addAnnotatedClass(Course.class)
+                .addAnnotatedClass(Review.class)
+                .addAnnotatedClass(Student.class)
                 .buildSessionFactory();
 
         Session session = factory.getCurrentSession();
@@ -23,13 +23,14 @@ public class EagerLazyDemo {
 
             session.beginTransaction();
 
-            int theId = 1;
-            Instructor instructor = session.get(Instructor.class, theId);
-            System.out.println("luv2code: instructor: " + instructor);
+            int studentId = 2;
+            Student student = session.get(Student.class, studentId);
+            System.out.println("Loaded student: " + student);
+            System.out.println("Courses: " + student.getCourses());
 
-            session.close();
+            System.out.println("Deleting student...");
+            session.delete(student);
 
-            System.out.println("luv2code: Courses: " + instructor.getCourses());
 
             session.getTransaction().commit();
         }

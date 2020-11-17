@@ -1,14 +1,11 @@
 package com.luv2code.hibernate.demo;
 
-import com.luv2code.hibernate.demo.entity.Course;
-import com.luv2code.hibernate.demo.entity.Instructor;
-import com.luv2code.hibernate.demo.entity.InstructorDetail;
-import com.luv2code.hibernate.demo.entity.Review;
+import com.luv2code.hibernate.demo.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class DeleteCourseAndReviewsDemo {
+public class AddCoursesForStudent {
     public static void main(String[] args) {
 
         SessionFactory factory = new Configuration()
@@ -17,6 +14,7 @@ public class DeleteCourseAndReviewsDemo {
                 .addAnnotatedClass(InstructorDetail.class)
                 .addAnnotatedClass(Course.class)
                 .addAnnotatedClass(Review.class)
+                .addAnnotatedClass(Student.class)
                 .buildSessionFactory();
 
         Session session = factory.getCurrentSession();
@@ -25,14 +23,19 @@ public class DeleteCourseAndReviewsDemo {
 
             session.beginTransaction();
 
-            int theId = 10;
-            Course tempCourse = session.get(Course.class, theId);
+            int studentId = 2;
+            Student student = session.get(Student.class, studentId);
+            System.out.println("Loaded student: " + student);
 
-            System.out.println("Deleting course ....");
-            System.out.println(tempCourse);
-            System.out.println(tempCourse.getReviews());
+            Course maryCourse1 = new Course("Rubik`s - How to solve rubik`s Cube");
+            Course maryCourse2 = new Course("Atari 2600 - Game Development");
 
-            session.delete(tempCourse);
+            student.addCourse(maryCourse1);
+            student.addCourse(maryCourse2);
+            System.out.println("Saving the courses ...");
+
+            session.save(maryCourse1);
+            session.save(maryCourse2);
 
             session.getTransaction().commit();
         }

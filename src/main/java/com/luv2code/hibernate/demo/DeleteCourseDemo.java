@@ -1,8 +1,6 @@
 package com.luv2code.hibernate.demo;
 
-import com.luv2code.hibernate.demo.entity.Course;
-import com.luv2code.hibernate.demo.entity.Instructor;
-import com.luv2code.hibernate.demo.entity.InstructorDetail;
+import com.luv2code.hibernate.demo.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -15,6 +13,8 @@ public class DeleteCourseDemo {
                 .addAnnotatedClass(Instructor.class)
                 .addAnnotatedClass(InstructorDetail.class)
                 .addAnnotatedClass(Course.class)
+                .addAnnotatedClass(Review.class)
+                .addAnnotatedClass(Student.class)
                 .buildSessionFactory();
 
         Session session = factory.getCurrentSession();
@@ -23,8 +23,10 @@ public class DeleteCourseDemo {
 
             session.beginTransaction();
 
-            int theId = 5;
-            Course course = session.get(Course.class, theId);
+            int courseId = 10;
+            Course course = session.get(Course.class, courseId);
+
+            System.out.println("Deleting course: " + course);
 
             session.delete(course);
 
