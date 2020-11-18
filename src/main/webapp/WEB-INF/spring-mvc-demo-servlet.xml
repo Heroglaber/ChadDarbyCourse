@@ -17,8 +17,32 @@
 	<!-- Step 4: Add support for conversion, formatting and validation support -->
 	<mvc:annotation-driven/>
 
-	<context:property-placeholder location="classpath:messages.properties" />
+	<bean id="dataSource"
+		  class="org.apache.tomcat.dbcp.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/web_customer_tracker?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC"/>
+		<property name="username" value="springstudent"/>
+		<property name="password" value="springstudent"/>
+	</bean>
 
+	<bean id="sessionFactory"
+		  class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource"
+				  ref="dataSource"/>
+		<property name="packagesToScan"
+				  value="com.luv2code.hibernate.entity"/>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="transactionManager"
+		  class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
 
 	<!-- Step 5: Define Spring MVC view resolver -->
 	<bean id="templateResolver" class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
@@ -35,13 +59,6 @@
 		<property name="templateEngine" ref="templateEngine"/>
 		<property name="order" value="1"/>
 		<property name="viewNames" value="*"/>
-	</bean>
-
-	<!-- Load custom message resources-->
-	<bean id="messageSource"
-		  class="org.springframework.context.support.ResourceBundleMessageSource">
-
-		<property name="basenames" value="messages"/>
 	</bean>
 </beans>
 
