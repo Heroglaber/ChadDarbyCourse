@@ -1,14 +1,13 @@
 package com.luv2code.hibernate.dao;
 
 import com.luv2code.hibernate.entity.Customer;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,12 +26,7 @@ public class CustomerDAO implements DAO<Customer> {
     @Transactional
     public List<Customer> getAll() {
 
-        Session session = null;
-        try {
-            session = sessionFactory.getCurrentSession();
-        } catch (HibernateException e) {
-            session = sessionFactory.openSession();
-        }
+        Session session = sessionFactory.getCurrentSession();
 
         Query<Customer> query =
                 session.createQuery("from Customer", Customer.class);
