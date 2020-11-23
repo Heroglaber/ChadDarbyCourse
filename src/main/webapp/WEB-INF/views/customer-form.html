@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>save customer</title>
+    <link type="text/css"
+          rel="stylesheet"
+          th:href="@{/static/css/add-customer-style.css}"/>
+    <link type="text/css"
+          rel="stylesheet"
+          th:href="@{/static/css/style.css}"/>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <h2>CRM - Customer Relationship Manager</h2>
+        </div>
+    </div>
+    <div id="container">
+        <h3>Save Customer</h3>
+        <form th:method="POST" th:action="@{/customer}" th:object="${customer}">
+            <input type="hidden" th:field="*{id}" id="id">
+            <table>
+                <tbody>
+                    <tr>
+                        <td><label for="firstName">Enter first name: </label></td>
+                        <td><input type="text" th:field="*{firstName}" id="firstName"/></td>
+                    </tr>
+                    <tr>
+                        <td><label for="lastName">Enter last name: </label></td>
+                        <td><input type="text" th:field="*{lastName}" id="lastName"/></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">Enter email: </label></td>
+                        <td><input type="text" th:field="*{email}" id="email"/></td>
+                    </tr>
+                    <tr>
+                        <td><label></label></td>
+                        <td><input type="submit" value="Save" class="save"/></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
